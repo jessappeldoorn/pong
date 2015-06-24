@@ -1,7 +1,5 @@
 var canvas = document.getElementById("table"),
-  context = canvas.getContext('2d'),
-  speed = 3;
-
+  context = canvas.getContext('2d');
 
 //Paddle
 function Paddle(x, y, width, height, speed) {
@@ -18,21 +16,37 @@ Paddle.prototype.render = function() {
 };
 
 Paddle.prototype.move = function(e) {
-  console.log(e);
+  // console.log(e);
     if (e.keyCode === 38) {
+      clearCanvas();
+      if (this.y <= 10) {
+        this.y = this.y;
+      } else {
       this.y = this.y - this.speed;
-      context.fillRect(this.x, this.y, this.width, this.height);
-   }
+      context.fillRect(this.x, this.y, this.width, this.height); 
+      }
+    };
+   
     if (e.keyCode === 40 ) {
+      clearCanvas();
+      if (this.y >= 470) {
+        this.y = this.y;
+      } else {
       this.y = this.y + this.speed;
       context.fillRect(this.x, this.y, this.width, this.height);
-   }
-   e.preventDefault();
+      }
+    };
+
+    e.preventDefault();
+  };
+
+  function clearCanvas() {
+    canvas.height = canvas.height;
   };
 
 //Player
 function Player() {
-  this.paddle = new Paddle(125, 250, 20, 100, 10);
+  this.paddle = new Paddle(25, 250, 20, 120, 10);
 }
 
 Player.prototype.render = function() {
@@ -45,7 +59,7 @@ Player.prototype.move = function(e) {
 
 //Computer
 function Computer() {
-  this.paddle = new Paddle(650, 250, 20, 100, 10);
+  this.paddle = new Paddle(955, 250, 20, 120, 10);
 }
 
 Computer.prototype.render = function() {
@@ -69,11 +83,16 @@ Ball.prototype.render = function() {
 //adding elements from constructors
 var player = new Player(),
   computer = new Computer(),
-  ball = new Ball(390, 290);
+  ball = new Ball(500, 300);
 
   var render = function() {
-    context.fillStyle = '#795577' 
-    context.fillRect(100, 100, 600, 400);
+    context.strokeStyle = '#795577' 
+    context.strokeRect(0, 0, 1000, 600);
+    context.beginPath();
+    context.moveTo(500, 0);
+    context.lineTo(500, 700);
+    context.strokeStyle = "#FFFFFF";
+    context.stroke();
     player.render();
     computer.render();
     ball.render();
@@ -83,7 +102,7 @@ var player = new Player(),
     console.log('move function triggered');
       player.move(e);
   
-  };
+  }
       
   //prepare for animation
  var step = function() {
@@ -147,10 +166,10 @@ var player = new Player(),
 
 
 
-//   context.beginPath();
-//   context.moveTo(500, 0);
-//   context.lineTo(500, 700);
-//   context.strokeStyle = "#000000";
-//   context.stroke();
+  context.beginPath();
+  context.moveTo(500, 0);
+  context.lineTo(500, 700);
+  context.strokeStyle = "#000000";
+  context.stroke();
     
 
