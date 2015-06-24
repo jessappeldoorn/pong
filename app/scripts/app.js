@@ -1,12 +1,15 @@
 var canvas = document.getElementById("table"),
-  context = canvas.getContext('2d');
+  context = canvas.getContext('2d'),
+  speed = 3;
+
 
 //Paddle
-function Paddle(x, y, width, height) {
+function Paddle(x, y, width, height, speed) {
   this.x = x;
   this.y = y;
   this.width = width;
   this.height = height;
+  this.speed = speed;
 };
 
 Paddle.prototype.render = function() {
@@ -14,18 +17,35 @@ Paddle.prototype.render = function() {
   context.fillRect(this.x, this.y, this.width, this.height);
 };
 
+Paddle.prototype.move = function(e) {
+  console.log(e);
+    if (e.keyCode === 38) {
+      this.y = this.y - this.speed;
+      context.fillRect(this.x, this.y, this.width, this.height);
+   }
+    if (e.keyCode === 40 ) {
+      this.y = this.y + this.speed;
+      context.fillRect(this.x, this.y, this.width, this.height);
+   }
+   e.preventDefault();
+  };
+
 //Player
 function Player() {
-  this.paddle = new Paddle(125, 250, 20, 100);
+  this.paddle = new Paddle(125, 250, 20, 100, 10);
 }
 
 Player.prototype.render = function() {
   this.paddle.render();
 };
 
+Player.prototype.move = function(e) {
+  this.paddle.move(e);
+};
+
 //Computer
 function Computer() {
-  this.paddle = new Paddle(650, 250, 20, 100);
+  this.paddle = new Paddle(650, 250, 20, 100, 10);
 }
 
 Computer.prototype.render = function() {
@@ -52,14 +72,35 @@ var player = new Player(),
   ball = new Ball(390, 290);
 
   var render = function() {
-    context.strokeStyle = '#795577' 
-    context.strokeRect(100, 100, 600, 400);
+    context.fillStyle = '#795577' 
+    context.fillRect(100, 100, 600, 400);
     player.render();
     computer.render();
     ball.render();
-  }
+  };
 
-  window.addEventListener("load", render);
+  var move = function(e) {
+    console.log('move function triggered');
+      player.move(e);
+  
+  };
+      
+  //prepare for animation
+ var step = function() {
+    render();
+    animate(step, 1000/60);
+  };
+
+  var animate = window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame    ||
+        window.oRequestAnimationFrame      || 
+        window.msRequestAnimationFrame     ||
+        step(); { window.setTimeout(step, 1000/60) };
+
+  window.addEventListener("load", step);
+  window.addEventListener("keydown", move, false);
+
 
 
 
