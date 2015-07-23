@@ -1,7 +1,7 @@
-Bloc Base Project
+CMYK Pong
 =================
 
-A base for Bloc frontend projects.
+A pong game built with HTML5 and Javascript.
 
 ## Configuration
 
