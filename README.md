@@ -3,28 +3,6 @@ CMYK Pong
 
 A pong game built with HTML5 and Javascript.
 
-## Configuration
-
-Configuring this project should be consistent across Nitrous, Mac (local), and Vagrant.
-
-Start by cloning the repository
-
-```
-$ git clone https://github.com/Bloc/base-frontend-project.git <your-frontend-project-name>
-```
-
-The project uses Grunt to run tasks (detailed below); start by installing the Grunt Command Line Interface (`grunt-cli`) globally on your machine.
-
-```
-$ npm install -g grunt-cli
-```
-
-Once that's complete, install the remaining project dependencies by running
-
-```
-$ npm install
-```
-
 ## Grunt
 
 This project base uses [Grunt](http://gruntjs.com/) to serve, build and watch project files in development. We've configured Grunt to work for you, but if you're interested in learning more about how Grunt works, look at Grunt's [Getting Started Guide](http://gruntjs.com/getting-started) or watch [Egghead's introduction to Grunt video](https://egghead.io/lessons/gruntjs-introduction-to-grunt).
